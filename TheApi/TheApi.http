@@ -1,0 +1,14 @@
+@TheApi_HostAddress = https://localhost:7119
+
+### Send Event
+
+POST  {{TheApi_HostAddress}}/SendEvent/
+Accept: application/json
+Content-Type: application/json
+
+{
+    "requestId": {{$guid}},
+    "message": "Hello, World!"
+}
+
+###
