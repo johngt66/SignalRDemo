@@ -12,6 +12,7 @@ public class EventService(IHubContext<TheHub, IEventClient> hubContext) : IEvent
     {
         try
         {
+            Console.WriteLine($"Handling request: {request.RequestId} - {request.Message}");    
             _hubContext.Clients.All.ProcessOutbox(request);
             return Task.FromResult(true);
         }

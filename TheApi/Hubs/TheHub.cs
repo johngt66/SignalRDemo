@@ -5,9 +5,9 @@ namespace TheApi.Hubs;
 
 public class TheHub : Hub<IEventClient>
 {
-    public Task ItemHandled(Guid requestId)
+    public Task ItemHandled(EventRequest request)
     {
-        Console.WriteLine($"Item handled: {requestId}");
+        Console.WriteLine($"Item handled: {request.ToString()}");
         return Task.CompletedTask;
     }
 }
