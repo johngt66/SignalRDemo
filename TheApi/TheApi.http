@@ -1,14 +1,14 @@
-@TheApi_HostAddress = https://localhost:7119
 
 ### Send Event
-
+# @name SendEvent
 POST  {{TheApi_HostAddress}}/SendEvent/
 Accept: application/json
 Content-Type: application/json
+Authorization: Bearer {{TheApi_JWT}}
 
 {
-    "requestId": {{$guid}},
-    "message": "Hello, World!"
+    "requestId": "{{$guid}}",
+    "message": "Hello at {{$localDatetime 'YYYY-MM-DD HH:mm:ss'}}"
 }
 
 ###
