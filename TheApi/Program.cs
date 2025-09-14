@@ -9,6 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSignalR();
 builder.Services.AddSingleton<IEventService, EventService>();
 
+// don't log all the info from microsoft
+builder.Logging.ClearProviders();
+
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
@@ -24,9 +27,9 @@ app.UseHttpsRedirection();
 
 app.MapHub<TheApi.Hubs.TheHub>("/thehub");
 
-app.MapPost("/SendEvent", async Task<Results<Ok, BadRequest>> (IEventService eventService, [FromBody] EventRequest request) =>
+app.MapPost("/SendEvent", async Task<Results<Ok<string>, BadRequest>> (IEventService eventService, [FromBody] EventRequest request) =>
     await eventService.HandleRequest(request)
-        ? TypedResults.Ok()
+        ? TypedResults.Ok($"Event {request.RequestId} Dispatched.")
         : TypedResults.BadRequest())
     .WithName("SendEvent")
     .WithOpenApi();

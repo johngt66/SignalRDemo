@@ -5,6 +5,45 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "TheApi external",
+            "preLaunchTask": "dotnet: build",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/TheApi/bin/Debug/net9.0/TheApi.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "console": "externalTerminal",
+            "launchBrowser": {
+                "enabled": false
+            },
+            "launchSettingsFilePath": "${workspaceFolder}/TheApi/Properties/launchSettings.json",
+            "launchSettingsProfile": "https",
+            "serverReadyAction": {
+                "action": "debugWithEdge",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
+            "name": "TheService external",
+            "type": "coreclr",
+            "preLaunchTask": "dotnet: build",
+            "request": "launch",
+            "program": "${workspaceFolder}/TheService/bin/Debug/net9.0/TheService.exe",
+            "launchSettingsProfile": "TheService",
+            "launchSettingsFilePath": "${workspaceFolder}/TheService/Properties/launchSettings.json",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "console": "externalTerminal"
+        },
+        {
             "name": "C#: ThApi Debug",
             "type": "dotnet",
             "request": "launch",
@@ -23,6 +62,14 @@
             "configurations": [
                 "C#: ThApi Debug",
                 "C#: ThService Debug"
+            ],
+            "stopAll": true
+        },
+        {
+            "name": "External Compound",
+            "configurations": [
+                "TheApi external",
+                "TheService external"
             ],
             "stopAll": true
         }
